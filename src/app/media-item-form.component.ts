@@ -6,7 +6,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   templateUrl: './media-item-form.component.html',
   styleUrls: ['./media-item-form.component.css']
 })
-export class MediaItemFormComponent implements OnInit{
+export class MediaItemFormComponent implements OnInit {
   form: FormGroup;
 
   ngOnInit() {
@@ -31,7 +31,12 @@ export class MediaItemFormComponent implements OnInit{
     if (year >= minYear && year <= maxYear) {
       return null;
     } else {
-      return { year: true};
+      return {
+        year: {
+          min: minYear,
+          max: maxYear
+        }
+      };
     }
   }
 
