@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { MediaItemListComponent } from './media-item-list.component';
 import { MediaItemComponent } from './media-item.component';
-
+import { FavoriteDirective } from './favorite.directive';
 @NgModule({
   imports: [
     BrowserModule
@@ -11,7 +11,8 @@ import { MediaItemComponent } from './media-item.component';
   declarations: [
     AppComponent,
     MediaItemComponent,
-    MediaItemListComponent
+    MediaItemListComponent,
+    FavoriteDirective
   ],
   bootstrap: [
     AppComponent
