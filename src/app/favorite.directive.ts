@@ -1,4 +1,4 @@
-import { Directive, Host, HostBinding } from "@angular/core";
+import { Directive, HostBinding, Input } from "@angular/core";
 
 @Directive({
     selector: '[mwFavorite]',
@@ -6,4 +6,7 @@ import { Directive, Host, HostBinding } from "@angular/core";
 
 export class FavoriteDirective {
     @HostBinding('class.is-favorite') isFavorite = true;
+    @Input() set mwFavorite(value) {
+        this.isFavorite = value
+    }
 }
