@@ -11,19 +11,20 @@ import { lookupListsToken } from './providers';
 export class MediaItemFormComponent implements OnInit {
   form: FormGroup;
 
-  constructor(private formBuiler: FormBuilder,
+  constructor(
+    private formBuilder: FormBuilder,
     private mediaItemService: MediaItemService,
     @Inject(lookupListsToken) public lookupLists) {}
 
   ngOnInit() {
-    this.form = this.formBuiler.group({
-      medium: this.formBuiler.control('Movies'),
-      name: this.formBuiler.control('', Validators.compose([
+    this.form = this.formBuilder.group({
+      medium: this.formBuilder.control('Movies'),
+      name: this.formBuilder.control('', Validators.compose([
         Validators.required,
         Validators.pattern('[\\w\\-\\s\\/]+')
       ])),
-      category: this.formBuiler.control(''),
-      year: this.formBuiler.control('', this.yearValidator)
+      category: this.formBuilder.control(''),
+      year: this.formBuilder.control('', this.yearValidator),
     });
   }
 
@@ -47,7 +48,6 @@ export class MediaItemFormComponent implements OnInit {
   }
 
   onSubmit(mediaItem) {
-    console.log(mediaItem)
-    this.mediaItemService.add(mediaItem)
+    this.mediaItemService.add(mediaItem);
   }
 }

@@ -6,15 +6,16 @@ import { MediaItemService } from './media-item.service';
   templateUrl: './media-item-list.component.html',
   styleUrls: ['./media-item-list.component.css']
 })
-export class MediaItemListComponent implements OnInit{
+export class MediaItemListComponent implements OnInit {
   mediaItems;
+
   constructor(private mediaItemService: MediaItemService) {}
-  
+
   ngOnInit() {
-      this.mediaItems = this.mediaItemService.get();
+    this.mediaItems = this.mediaItemService.get();
   }
 
   onMediaItemDelete(mediaItem) {
-    this.mediaItemService.delete(mediaItem)
+    this.mediaItemService.delete(mediaItem);
   }
 }
