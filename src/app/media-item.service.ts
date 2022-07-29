@@ -9,33 +9,41 @@ import { throwError } from 'rxjs';
 export class MediaItemService {
   constructor(private http: HttpClient) {}
 
-  get(medium) {
+  get(medium: string) {
     const getOptions = {
-      params: { medium}
-    }
-    return this.http.get<MediaItemResponse>('mediaitems', getOptions)
+      params: { medium }
+    };
+    return this.http.get<MediaItemsResponse>('mediaitems', getOptions)
+      .pipe(
+        map((response: MediaItemsResponse) => {
+          return response.mediaItems;
+        }),
+        catchError(this.handleError)
+      );
+  }
+
+  add(mediaItem: MediaItem) {
+    return this.http.post('mediaitems', mediaItem)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  delete(mediaItem: MediaItem) {
+    return this.http.delete(`mediaitems/${mediaItem.id}`)
     .pipe(
-      map((response: MediaItemResponse) => {
-        return response.mediaItems; 
-      }),
-    catchError(this.handleError)
+      catchError(this.handleError)
     );
   }
 
-  add(mediaItem) {
-    return this.http.post('mediaitems', mediaItem)
-    .pipe(catchError(this.handleError));
-  }
-
-  delete(mediaItem) {
-    return this.http.delete(`mediaitems/${mediaItem.id}`)
-    .pipe(catchError(this.handleError));
-  }
-
   private handleError(error: HttpErrorResponse) {
-    console.log(error.message);
+    console.error(error.message);
     return throwError('A data error occurred, please try again.');
   }
+}
+
+interface MediaItemsResponse {
+  mediaItems: MediaItem[];
 }
 
 export interface MediaItem {
@@ -46,8 +54,4 @@ export interface MediaItem {
   year: number;
   watchedOn: number;
   isFavorite: boolean;
-}
-
-interface MediaItemResponse {
-  mediaItems: MediaItem[];
 }

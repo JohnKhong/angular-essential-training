@@ -51,8 +51,8 @@ export class MediaItemFormComponent implements OnInit {
 
   onSubmit(mediaItem) {
     this.mediaItemService.add(mediaItem)
-    .subscribe(() => {
-      this.router.navigate(['/', mediaItem.medium]);
-    });
+      .subscribe(() => {
+        this.router.navigate(['/', mediaItem.medium]);
+      });
   }
 }
