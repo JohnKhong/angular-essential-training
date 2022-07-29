@@ -52,8 +52,11 @@ export class MediaItemService {
 
   constructor(private http: HttpClient) {}
 
-  get() {
-    return this.http.get<MediaItemResponse>('mediaitems')
+  get(medium) {
+    const getOptions = {
+      params: { medium}
+    }
+    return this.http.get<MediaItemResponse>('mediaitems', getOptions)
     .pipe(map(response => { return response.mediaItems; }));
   }
 
@@ -69,7 +72,7 @@ export class MediaItemService {
   }
 }
 
-interface MediaItem {
+export interface MediaItem {
   id: number;
   name: string;
   medium: string;
